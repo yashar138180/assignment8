@@ -10,6 +10,23 @@ const COURSES = [
   { id: 4, title: "Software Engineering", credits: 4 },
 ];
 
+let requestsServed = 0;
+
+// Middleware 1: logs every request (timestamp, method, URL).
+function requestLogger(req, res, next) {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+}
+
+// Middleware 2: counts every request that reaches the server.
+function requestCounter(req, res, next) {
+  requestsServed += 1;
+  next();
+}
+
+app.use(requestLogger);
+app.use(requestCounter);
+
 app.get("/hello", (req, res) => {
   res.type("text/plain");
   res.send("Hello from Yashar's server");
@@ -44,6 +61,10 @@ app.get("/api/headers", (req, res) => {
 app.post("/api/subscribe", (req, res) => {
   res.status(201).json({ subscribed: true });
 });
+app.get("/api/stats", (req, res) => {
+  res.json({ requestsServed });
+});
+
 
 app.get("/api/admin", (req, res) => {
   res.status(403).json({ error: "Forbidden" });
