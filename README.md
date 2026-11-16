@@ -27,15 +27,15 @@ $env:PORT=4000; npm start
 
 ```
 assignment8/
-├── public/
-│   ├── index.html    the browser page (one button per API route)
-│   ├── styles.css    styles for the page
-│   └── app.js        calls the routes with fetch() and shows status + body
-├── server.js         Express app, data, middleware, routes and 404 fallback
-├── package.json      "type": "module", express dependency, start and dev scripts
-├── package-lock.json exact dependency versions
-├── .gitignore        excludes node_modules/ and .env
-└── README.md
+â”œâ”€â”€ public/
+â”‚   â”œâ”€â”€ index.html    the browser page (one button per API route)
+â”‚   â”œâ”€â”€ styles.css    styles for the page
+â”‚   â””â”€â”€ app.js        calls the routes with fetch() and shows status + body
+â”œâ”€â”€ server.js         Express app, data, middleware, routes and 404 fallback
+â”œâ”€â”€ package.json      "type": "module", express dependency, start and dev scripts
+â”œâ”€â”€ package-lock.json exact dependency versions
+â”œâ”€â”€ .gitignore        excludes node_modules/ and .env
+â””â”€â”€ README.md
 ```
 
 ## Routes
@@ -71,4 +71,96 @@ does not accept it.
 
 ## Testing Evidence (curl --include)
 
-PASTE_CURL_OUTPUT_HERE
+```text
+$ curl --include http://localhost:3000/api/courses
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 190
+ETag: W/"be-5Vt/PqUj7qc1LMluV5/q1M+TE4I"
+Date: Mon, 16 Nov 2026 16:56:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[{"id":1,"title":"Web Programming","credits":6},{"id":2,"title":"Databases","credits":5},{"id":3,"title":"Computer Networks","credits":5},{"id":4,"title":"Software Engineering","credits":4}]
+
+
+$ curl --include -X POST http://localhost:3000/api/subscribe
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 19
+ETag: W/"13-oWAPIqDXuocNexKhPYW9ayyk98c"
+Date: Mon, 16 Nov 2026 16:56:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"subscribed":true}
+
+
+$ curl --include http://localhost:3000/api/admin
+HTTP/1.1 403 Forbidden
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 21
+ETag: W/"15-TLNzmZqKxaTuFdX/dVWWPBu44/c"
+Date: Mon, 16 Nov 2026 16:56:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Forbidden"}
+
+
+$ curl --include http://localhost:3000/old-page
+HTTP/1.1 301 Moved Permanently
+X-Powered-By: Express
+Location: /hello
+Vary: Accept
+Content-Type: text/plain; charset=utf-8
+Content-Length: 40
+Date: Mon, 16 Nov 2026 16:56:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+Moved Permanently. Redirecting to /hello
+
+
+$ curl --include http://localhost:3000/api/unknown
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 21
+ETag: W/"15-bm7tJgu8FHlq5QU+Y6gDxOGPfRc"
+Date: Mon, 16 Nov 2026 16:56:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Not found"}
+
+
+$ curl --include http://localhost:3000/unknown-page
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Type: text/plain; charset=utf-8
+Content-Length: 20
+ETag: W/"14-uqvetqrE8oeY4r2Xn8/CTahXnYE"
+Date: Mon, 16 Nov 2026 16:56:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+404 - Page not found
+
+
+$ curl --include http://localhost:3000/robots.txt
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/plain; charset=utf-8
+Content-Length: 35
+ETag: W/"23-AFlBEdGVlEiTRhyly9yF5dDLJM0"
+Date: Mon, 16 Nov 2026 16:56:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+User-agent: *
+Disallow: /api/admin
+```
