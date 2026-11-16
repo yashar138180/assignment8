@@ -48,6 +48,16 @@ app.post("/api/subscribe", (req, res) => {
 app.get("/api/admin", (req, res) => {
   res.status(403).json({ error: "Forbidden" });
 });
+// 404 fallback: must stay after every real route,
+// otherwise it would answer before them and hide them.
+app.use((req, res) => {
+  if (req.path.startsWith("/api")) {
+    res.status(404).json({ error: "Not found" });
+  } else {
+    res.status(404).type("text/plain").send("404 - Page not found");
+  }
+});
+
 
 
 
