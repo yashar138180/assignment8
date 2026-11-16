@@ -27,15 +27,15 @@ $env:PORT=4000; npm start
 
 ```
 assignment8/
-â”œâ”€â”€ public/
-â”‚   â”œâ”€â”€ index.html    the browser page (one button per API route)
-â”‚   â”œâ”€â”€ styles.css    styles for the page
-â”‚   â””â”€â”€ app.js        calls the routes with fetch() and shows status + body
-â”œâ”€â”€ server.js         Express app, data, middleware, routes and 404 fallback
-â”œâ”€â”€ package.json      "type": "module", express dependency, start and dev scripts
-â”œâ”€â”€ package-lock.json exact dependency versions
-â”œâ”€â”€ .gitignore        excludes node_modules/ and .env
-â””â”€â”€ README.md
+├── public/
+│   ├── index.html    the browser page (one button per API route)
+│   ├── styles.css    styles for the page
+│   └── app.js        calls the routes with fetch() and shows status + body
+├── server.js         Express app, data, middleware, routes and 404 fallback
+├── package.json      "type": "module", express dependency, start and dev scripts
+├── package-lock.json exact dependency versions
+├── .gitignore        excludes node_modules/ and .env
+└── README.md
 ```
 
 ## Routes
