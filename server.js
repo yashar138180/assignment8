@@ -1,4 +1,6 @@
 import express from "express";
+import express from "express";
+import path from "node:path";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,6 +28,11 @@ function requestCounter(req, res, next) {
 
 app.use(requestLogger);
 app.use(requestCounter);
+
+// Serve public/ with an absolute path, so the server works
+// no matter which folder it is started from.
+const PUBLIC_DIR = path.join(import.meta.dirname, "public");
+app.use(express.static(PUBLIC_DIR));
 
 app.get("/hello", (req, res) => {
   res.type("text/plain");

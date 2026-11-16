@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applied Web Studies</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Applied Web Studies</h1>
+      <p class="subtitle">A made-up study programme</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>About the programme</h2>
+        <p>
+          Applied Web Studies is a short, practical programme about how the web works.
+          Students learn to build front-end pages, write back-end servers with Node.js and
+          Express, and connect the two through HTTP APIs.
+        </p>
+        <p>
+          This page is served by the programme's own Express server. Use the buttons below to
+          call each API route and see the status code and the body it returns.
+        </p>
+      </section>
+
+      <section>
+        <h2>Try the API</h2>
+        <div class="buttons">
+          <button type="button" data-method="GET" data-url="/api/courses">GET /api/courses</button>
+          <button type="button" data-method="GET" data-url="/api/status">GET /api/status</button>
+          <button type="button" data-method="GET" data-url="/api/headers">GET /api/headers</button>
+          <button type="button" data-method="POST" data-url="/api/subscribe">POST /api/subscribe</button>
+          <button type="button" data-method="GET" data-url="/api/admin">GET /api/admin</button>
+          <button type="button" data-method="GET" data-url="/api/stats">GET /api/stats</button>
+          <button type="button" data-method="GET" data-url="/api/does-not-exist">GET /api/does-not-exist</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Response</h2>
+        <p id="status" class="status">Click a button to send a request.</p>
+        <pre id="output"></pre>
+      </section>
+    </main>
+
+    <footer>
+      <p>Web Programming - Fall 2026 - Assignment 8</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
